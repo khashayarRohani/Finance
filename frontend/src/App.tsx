@@ -33,6 +33,13 @@ function App() {
     setPortfolioValues(updatedPortfolio);
     // console.log("here in onCreate: ", e);
   };
+  const onPortfolioDelete = (e: any) => {
+    e.preventDefault();
+    const removed = portfolioValues.filter((portfolioValue) => {
+      return portfolioValue !== e.target[0].value;
+    });
+    setPortfolioValues(removed);
+  };
   return (
     <>
       <Search
@@ -41,7 +48,10 @@ function App() {
         search={search}
       />
       {serverError && <h1>{serverError}</h1>}
-      <ListPortfolio portfolioValues={portfolioValues} />
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
       <CardList
         onPortfolioCreate={onPortfolioCreate}
         searchResults={searchResult}
