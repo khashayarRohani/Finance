@@ -10,20 +10,24 @@ type Props = {
 const CardList: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <>
-      {props.searchResults.length > 0 ? (
-        props.searchResults.map((searchResult) => {
-          return (
-            <Card
-              onPortfolioCreate={props.onPortfolioCreate}
-              id={searchResult.symbol}
-              key={uuidv4()}
-              searchResult={searchResult}
-            />
-          );
-        })
-      ) : (
-        <h1>No Result</h1>
-      )}
+      <div>
+        {props.searchResults.length > 0 ? (
+          props.searchResults.map((searchResult) => {
+            return (
+              <Card
+                onPortfolioCreate={props.onPortfolioCreate}
+                id={searchResult.symbol}
+                key={uuidv4()}
+                searchResult={searchResult}
+              />
+            );
+          })
+        ) : (
+          <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+            No results!
+          </p>
+        )}
+      </div>
     </>
   );
 };
