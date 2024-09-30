@@ -1,5 +1,10 @@
 import axios from "axios";
-import { CompanyProfile, CompanySearch } from "./company";
+import {
+  CompanyIncomeStatement,
+  CompanyKeyMetrix,
+  CompanyProfile,
+  CompanySearch,
+} from "./company";
 
 interface SearchResponse {
   data: CompanySearch[];
@@ -32,5 +37,42 @@ export const getCompanyProfile = async (query: string) => {
     return data;
   } catch (error: any) {
     console.log("error message from API: ", error.message);
+  }
+};
+export const getKeyMatrix = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyKeyMetrix>(
+      `https://financialmodelingprep.com/api/v3/key-metrics-ttm/${query}?limit=40&apikey=${
+        import.meta.env.VITE_REACT_APP_API_KEY
+      }`
+    );
+
+    return data;
+  } catch (error: any) {
+    console.log("error message from API: ", error.message);
+  }
+};
+export const getIncomeStatement = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyIncomeStatement[]>(
+      `https://financialmodelingprep.com/api/v3/income-statement/${query}?limit=40&apikey=${
+        import.meta.env.VITE_REACT_APP_API_KEY
+      }`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("error message: ", error.message);
+  }
+};
+export const getBalanceSheet = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyBalanceSheet[]>(
+      `https://financialmodelingprep.com/api/v3/balance-sheet-statement/${query}?limit=20&apikey=${
+        import.meta.env.VITE_REACT_APP_API_KEY
+      }`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("error message: ", error.message);
   }
 };
