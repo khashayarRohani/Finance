@@ -9,6 +9,7 @@ using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace api.Controllers
             _context = context;
         }
         [HttpGet]
+        [Authorize]
         public async Task <IActionResult> GetAll([FromQuery]ObjectQuery query)
         {
             
