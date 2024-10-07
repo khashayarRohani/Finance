@@ -49,6 +49,18 @@ namespace api.Repository
            {
             stocks = stocks.Where(w=> w.Symbol.Contains(query.Symbol));
            }
+           if(!string.IsNullOrWhiteSpace(query.SortBy))
+           {
+            if(query.SortBy.Equals("Symble",StringComparison.OrdinalIgnoreCase))
+            {
+                stocks = query.IsDecsending? stocks.OrderByDescending(o=>o.Symbol): stocks.OrderBy(o=> o.Symbol);
+            }
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
+
+
+            return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+           }
+          
 
            return await stocks.ToListAsync();
         }
@@ -77,6 +89,7 @@ namespace api.Repository
             existingStock.Purchase = stockDto.Purchase;
             existingStock.MarketCap = stockDto.MarketCap;
             existingStock.LastDiv = stockDto.LastDiv;
+        
             await _context.SaveChangesAsync();
             return existingStock;
         }

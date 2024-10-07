@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.DTOs.Comment;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +54,19 @@ namespace api.Repository
            return commentModel;
 
 
+        }
+
+        public async Task<Comment> UpdateAsync(int id, Comment commentModel)
+        {
+            var existingComment = await _context.Comments.FirstOrDefaultAsync(f=>f.Id==id);
+            if(existingComment==null)
+            return null;
+
+            existingComment.Content = commentModel.Content;
+            existingComment.Title=commentModel.Title;
+
+            await _context.SaveChangesAsync();
+            return existingComment;
         }
     }
 }
