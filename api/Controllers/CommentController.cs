@@ -56,6 +56,19 @@ namespace api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = commentModel }, commentModel.ToCommentDto());
 
         }
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var commentModel = await _commetRepo.DeleteAsync(id);
+
+            if(commentModel==null)
+            {
+                return NotFound("Comment does not Exist!!!");
+
+            }
+            return Ok(commentModel);
+        }
     }
 
   
