@@ -22,13 +22,13 @@ namespace api.Repository
         public async Task<List<Comment>> GetAllAsync()
         {
             
-            return await _context.Comments.ToListAsync();
+            return await _context.Comments.Include(i=>i.AppUser).ToListAsync();
 
         }
 
         public async Task<Comment> GetByIdAsync(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
+            var comment = await _context.Comments.Include(i=>i.AppUser).FirstOrDefaultAsync(f=>f.Id==id);
 
             if(comment == null)
             {
