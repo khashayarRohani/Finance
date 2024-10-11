@@ -39,15 +39,26 @@ On the backend, I utilized **ASP.NET Web API** with **Entity Framework** to inte
 
 ---
 
+### External APIs
+
+This application utilizes the [Financial Modeling Prep API](https://site.financialmodelingprep.com/) API to retrieve real-time stock and financial data. The API provides essential information, such as:
+
+- **Company Profiles**: Key details about the company, including background and financial metrics.
+- **Balance Sheets**: Displays the financial health of companies by showing assets, liabilities, and shareholder equity.
+- **Income Statements**: Provides a breakdown of a company's revenue, expenses, and profitability.
+- **Stock Information**: Real-time data on stock prices, market trends, and historical performance.
+  By integrating this API, the app ensures that users have access to the latest and most accurate financial data to make informed investment decisions.
+
+---
+
 ## Table of Contents
 
 1. [Tech Stack](#tech-stack)
 2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Running the Application](#running-the-application)
+3. [Running the Application](#running-the-application)
    - [Frontend](#running-the-frontend)
    - [Backend](#running-the-backend)
-5. [Dependencies](#dependencies)
+4. [Dependencies](#dependencies)
 
 ---
 
@@ -126,12 +137,3 @@ The frontend uses the following key dependencies:
 - Swashbuckle.AspNetCore: 6.4.0
 
 ---
-
-## Installation
-
-### 1. Clone the repository:
-
-```bash
-git clone https://github.com/khashayarRohani/Finance
-cd yourproject
-```
